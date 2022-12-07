@@ -26,8 +26,8 @@ import traceback
 
 log_level = logging.DEBUG
 
-logging.basicConfig(filename='server_error.log',
-                    filemode='a',
+logging.basicConfig(filename='logs/server_error.log',
+                    filemode='a+',
                     format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
                     datefmt='%H:%M:%S',
                     level=log_level)

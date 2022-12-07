@@ -4,8 +4,8 @@ import socket
 import threading
 import time
 
-logging.basicConfig(filename='client_notifications.log',
-                    filemode='a',
+logging.basicConfig(filename='logs/client_notifications.log',
+                    filemode='a+',
                     format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
                     datefmt='%H:%M:%S',
                     level=logging.DEBUG)
