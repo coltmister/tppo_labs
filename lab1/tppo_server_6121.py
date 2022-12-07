@@ -358,7 +358,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('-f', '--file', help='path to file with data', default='./device.csv')
     parser.add_argument('-a', '--address', help='address to listen', default='0.0.0.0')
-    parser.add_argument('-p', '--port', help='port to listen', default=9001, type=int)
+    parser.add_argument('-p', '--port', help='port to listen', default=8000, type=int)
     parser.add_argument('-l', '--notification-port', help='port to listen for notifications', default=8001, type=int)
     parser.add_argument('-d', '--debug', help='debug mode', default=False, type=bool)
 
