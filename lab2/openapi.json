@@ -1,0 +1,419 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Bed Reanimation API",
+    "description": "API for Bed Reanimation",
+    "contact": {
+      "name": "Якимов Я.Д",
+      "email": "yaroslav@itmo.ru"
+    },
+    "license": {
+      "name": "MIT License",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/v1/reanimation-bed": {
+      "get": {
+        "summary": "All parameters of the bed",
+        "description": "Get all parameters of the bed",
+        "operationId": "get_all_api_v1_reanimation_bed_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReanimationBed"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/reanimation-bed/angles": {
+      "get": {
+        "tags": [
+          "angles"
+        ],
+        "summary": "Angles of the bed",
+        "description": "Get angles of the bed",
+        "operationId": "get_angles_api_v1_reanimation_bed_angles_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Angles"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "angles"
+        ],
+        "summary": "Angles of the bed",
+        "description": "Set angles of the bed",
+        "operationId": "set_angles_api_v1_reanimation_bed_angles_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Angles"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/reanimation-bed/height": {
+      "get": {
+        "tags": [
+          "height"
+        ],
+        "summary": "Height of the bed",
+        "description": "Get height of the bed in cm",
+        "operationId": "get_height_api_v1_reanimation_bed_height_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Height"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "height"
+        ],
+        "summary": "Height of the bed",
+        "description": "Set height of the bed in cm",
+        "operationId": "set_height_api_v1_reanimation_bed_height_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Height"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/reanimation-bed/weight": {
+      "get": {
+        "tags": [
+          "weight"
+        ],
+        "summary": "Weight of the patient",
+        "description": "Get weight of the patient in kg",
+        "operationId": "get_weight_api_v1_reanimation_bed_weight_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Weight"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "weight"
+        ],
+        "summary": "Weight of the patient",
+        "description": "Set weight of the patient in kg",
+        "operationId": "set_weight_api_v1_reanimation_bed_weight_put",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Weight"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{path_name}": {
+      "get": {
+        "summary": "Read Root",
+        "operationId": "read_root__path_name__get",
+        "responses": {
+          "307": {
+            "description": "Successful Response"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Angles": {
+        "title": "Angles",
+        "required": [
+          "back",
+          "hip",
+          "ankle"
+        ],
+        "type": "object",
+        "properties": {
+          "back": {
+            "title": "Back",
+            "maximum": 50.0,
+            "minimum": 0.0,
+            "type": "integer",
+            "description": "Back angle of the bed. Must be in range [0, 50]",
+            "example": 30
+          },
+          "hip": {
+            "title": "Hip",
+            "maximum": 15.0,
+            "minimum": -15.0,
+            "type": "integer",
+            "description": "Hip angle of the bed. Must be in range [-15, 15]",
+            "example": 10
+          },
+          "ankle": {
+            "title": "Ankle",
+            "maximum": 30.0,
+            "minimum": 0.0,
+            "type": "integer",
+            "description": "Ankle angle of the bed. Must be in range [0, 30]",
+            "example": 20
+          }
+        }
+      },
+      "HTTPValidationError": {
+        "title": "HTTPValidationError",
+        "type": "object",
+        "properties": {
+          "detail": {
+            "title": "Detail",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            }
+          }
+        }
+      },
+      "Height": {
+        "title": "Height",
+        "required": [
+          "height"
+        ],
+        "type": "object",
+        "properties": {
+          "height": {
+            "title": "Height",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "type": "integer",
+            "description": "Height of the bed. Must be in range [0, 100]",
+            "example": 100
+          }
+        }
+      },
+      "ReanimationBed": {
+        "title": "ReanimationBed",
+        "required": [
+          "angles",
+          "height",
+          "weight"
+        ],
+        "type": "object",
+        "properties": {
+          "angles": {
+            "$ref": "#/components/schemas/Angles"
+          },
+          "height": {
+            "title": "Height",
+            "maximum": 100.0,
+            "minimum": 0.0,
+            "type": "integer",
+            "description": "Height of the bed. Must be in range [0, 100]",
+            "example": 100
+          },
+          "weight": {
+            "title": "Weight",
+            "maximum": 300.0,
+            "minimum": 0.0,
+            "type": "integer",
+            "description": "Weight of the patient. Must be in range [0, 300]",
+            "example": 80
+          }
+        }
+      },
+      "Response": {
+        "title": "Response",
+        "required": [
+          "status",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "title": "Status",
+            "type": "string",
+            "description": "Status of the request",
+            "example": "success/error"
+          },
+          "message": {
+            "title": "Message",
+            "type": "string",
+            "description": "Message of the request",
+            "example": "Bed angles changed"
+          }
+        }
+      },
+      "ValidationError": {
+        "title": "ValidationError",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "loc": {
+            "title": "Location",
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                }
+              ]
+            }
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        }
+      },
+      "Weight": {
+        "title": "Weight",
+        "required": [
+          "weight"
+        ],
+        "type": "object",
+        "properties": {
+          "weight": {
+            "title": "Weight",
+            "maximum": 300.0,
+            "minimum": 0.0,
+            "type": "integer",
+            "description": "Weight of the patient. Must be in range [0, 300]",
+            "example": 80
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "angles",
+      "description": "Operations with angles"
+    },
+    {
+      "name": "height",
+      "description": "Operations with height"
+    },
+    {
+      "name": "weight",
+      "description": "Operations with weight"
+    }
+  ]
+}

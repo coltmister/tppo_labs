@@ -19,6 +19,7 @@
 """
 import argparse
 import logging
+import os
 import socket
 import threading
 import time
@@ -26,12 +27,14 @@ import traceback
 
 log_level = logging.DEBUG
 
-logging.basicConfig(filename='logs/server_error.log',
+dir_path = os.path.dirname(os.path.realpath(__file__))
+logging.basicConfig(filename=f'{dir_path}/logs/server_error.log',
                     filemode='a+',
                     format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
                     datefmt='%H:%M:%S',
                     level=log_level)
 logger = logging.getLogger(__name__)
+raise_exception = False
 
 
 def threaded(fn):
@@ -276,7 +279,7 @@ class BedReanimation:
     def set_angles_to_device(self, back: int, hip: int, ankle: int) -> bytes:
         try:
             self.validate(back, hip, ankle)
-            with open('device.csv', 'w') as file:
+            with open(self.device_file, 'w') as file:
                 file.write(f'{back},{hip},{ankle},{self.height},{self.weight}')
             return "!Success: Angles are set \n".encode()
         except ValueError as e:
@@ -298,7 +301,7 @@ class BedReanimation:
     def set_height_to_device(self, height: int) -> bytes:
         try:
             self.validate(height=height)
-            with open('device.csv', 'w') as file:
+            with open(self.device_file, 'w') as file:
                 file.write(f'{self.back},{self.hip},{self.ankle},{height},{self.weight}')
             return "!Success: Height is set \n".encode()
         except ValueError as e:
@@ -321,7 +324,7 @@ class BedReanimation:
     def set_weight_to_device(self, weight: int) -> bytes:
         try:
             self.validate(weight=weight)
-            with open('device.csv', 'w') as file:
+            with open(self.device_file, 'w') as file:
                 file.write(f'{self.back},{self.hip},{self.ankle},{self.height},{weight}')
             return "!Success: Weight is set \n".encode()
         except ValueError as e:
@@ -356,7 +359,7 @@ class BedReanimation:
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('-f', '--file', help='path to file with data', default='./device.csv')
+    parser.add_argument('-f', '--file', help='path to file with data', default=f'{dir_path}/device.csv')
     parser.add_argument('-a', '--address', help='address to listen', default='0.0.0.0')
     parser.add_argument('-p', '--port', help='port to listen', default=8000, type=int)
     parser.add_argument('-l', '--notification-port', help='port to listen for notifications', default=8001, type=int)
